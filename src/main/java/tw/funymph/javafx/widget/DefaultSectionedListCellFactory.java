@@ -37,14 +37,14 @@ import javafx.scene.control.ListCell;
 final class DefaultSectionedListCellFactory<RawItemType> implements SectionedListViewCellFactory<RawItemType, DefaultSectionedListCell<RawItemType>, DefaultSectionedListCell<RawItemType>> {
 
 	@Override
-	public DefaultSectionedListCell<RawItemType> getRowCell(ListCell<SectionedListItem<RawItemType>> cell, IndexPath path, RawItemType item) {
+	public DefaultSectionedListCell<RawItemType> getRowCell(ListCell<?> cell, IndexPath path, RawItemType item) {
 		DefaultSectionedListCell<RawItemType> row = new DefaultSectionedListCell<>(item.toString());
 		row.setStyle("-fx-background-color: white;");
 		return row;
 	}
 
 	@Override
-	public DefaultSectionedListCell<RawItemType> getSectionHeader(ListCell<SectionedListItem<RawItemType>> cell, int sectionIndex, String title) {
+	public DefaultSectionedListCell<RawItemType> getSectionHeader(ListCell<?> cell, int sectionIndex, String title) {
 		DefaultSectionedListCell<RawItemType> header = new DefaultSectionedListCell<>(title);
 		header.setStyle("-fx-background-color: #999999;");
 		return header;

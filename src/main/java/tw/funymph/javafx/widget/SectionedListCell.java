@@ -25,11 +25,18 @@
 package tw.funymph.javafx.widget;
 
 /**
+ * The cell in a section should implement this interface for reuse.
+ * 
  * @author Pin-Ying Tu
  * @version 1.0
  * @since 1.0
  */
 public interface SectionedListCell<RawItemType> {
 
+	/**
+	 * Update the cell for the new item.
+	 * 
+	 * @param item the new item
+	 */
 	void updateItem(RawItemType item);
 }

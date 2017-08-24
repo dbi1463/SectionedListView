@@ -27,12 +27,21 @@ package tw.funymph.javafx.widget;
 import javafx.scene.control.Label;
 
 /**
+ * This internal implementation provides the {@link Label} as the
+ * section header and cell.
+ * 
  * @author Pin-Ying Tu
  * @version 1.0
  * @since 1.0
  */
 final class DefaultSectionedListCell<RawItemType> extends Label implements SectionedListCell<RawItemType>, SectionedListHeader {
 
+	/**
+	 * Construct a <code>DefaultSectionedListCell</code> with the
+	 * display content.
+	 * 
+	 * @param content the display content
+	 */
 	DefaultSectionedListCell(String content) {
 		super(content);
 	}

@@ -25,11 +25,18 @@
 package tw.funymph.javafx.widget;
 
 /**
+ * The section header view has to implement this interface for reuse.
+ * 
  * @author Pin-Ying Tu
  * @version 1.0
  * @since 1.0
  */
 public interface SectionedListHeader {
 
+	/**
+	 * Update the header with the new title.
+	 * 
+	 * @param title the new title
+	 */
 	void updateTitle(String title);
 }

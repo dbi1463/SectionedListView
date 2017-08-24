@@ -25,7 +25,7 @@
 package tw.funymph.javafx.widget;
 
 /**
- * This interface defines the required information for a item can
+ * This internal interface defines the required information for a item can
  * be displayed in the {@link SectionedListView}.
  * 
  * @author Pin-Ying Tu
@@ -39,19 +39,19 @@ interface SectionedListItem<RawItemType> {
 	 * 
 	 * @return true if the item is a header item
 	 */
-	public boolean isHeaderItem();
+	boolean isHeaderItem();
 
 	/**
 	 * Get the index path of the item.
 	 * 
 	 * @return the index path
 	 */
-	public IndexPath getIndexPath();
+	IndexPath getIndexPath();
 
 	/**
 	 * Get the wrapped raw item.
 	 * 
 	 * @return the raw item
 	 */
-	public RawItemType getRawItem();
+	RawItemType getRawItem();
 }

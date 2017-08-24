@@ -65,14 +65,13 @@ final class SectionedListCellContainer<RawItemType> extends ListCell<SectionedLi
 		if (empty || getIndex() < 0) {
 			setText(null);
 			setGraphic(null);
+			return;
+		}
+		if (item.isHeaderItem()) {
+			setGraphic(formattedHeaderView(item));
 		}
 		else {
-			if (item.isHeaderItem()) {
-				setGraphic(formattedHeaderView(item));
-			}
-			else {
-				setGraphic(formattedCell(item));
-			}
+			setGraphic(formattedCell(item));
 		}
 	}
 
@@ -86,10 +85,17 @@ final class SectionedListCellContainer<RawItemType> extends ListCell<SectionedLi
 	 * @param item the header item
 	 */
 	private Node formattedHeaderView(SectionedListItem<RawItemType> item) {
-		int sectionIndex = item.getIndexPath().getSection();
-		String title = listView.get().getSectionedListViewDataSource().getSectionTitle(sectionIndex);
-		Node cell = listView.get().getSectionedListViewCellFactory().getSectionHeader(this, sectionIndex, title);
-		return cell;
+		int section = item.getIndexPath().getSection();
+		String title = listView.get().getSectionedListViewDataSource().getSectionTitle(section);
+		Optional<Node> reusableHeader = listView.get().dequeueReusableHeader();
+		if (reusableHeader.isPresent()) {
+			Node header = reusableHeader.get();
+			((SectionedListHeader)header).updateTitle(title);
+			return header;
+		}
+		Node header = listView.get().getSectionedListViewCellFactory().getSectionHeader(this, section, title);
+		listView.get().enqueueReusableHeader(header);
+		return header;
 	}
 
 	/**

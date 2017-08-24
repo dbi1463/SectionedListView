@@ -43,19 +43,22 @@ public interface SectionedListViewCellFactory<RawItemType, CellType extends Node
 	 * by calling the {@link javafx.scene.control.ListCell#setGraphic(Node)}
 	 * method.
 	 * 
-	 * @param sectionIndex the section index
-	 * @param rowIndex the row index
+	 * @param cell the actual list cell (can customize its appearance)
+	 * @param path the index path
+	 * @param item the item displayed
 	 * @return the cell
 	 */
-	public CellType getRowCell(ListCell<SectionedListItem<RawItemType>> cell, IndexPath path, RawItemType item);
+	CellType getRowCell(ListCell<?> cell, IndexPath path, RawItemType item);
 
 	/**
 	 * Get the header cell for the section title specified by the section index.
 	 * The result of this method will be the graphic of the outer cell by calling
 	 * the {@link javafx.scene.control.ListCell#setGraphic(Node)} method.
 	 * 
-	 * @param sectionIndex the section index
+	 * @param cell the actual list cell (can customize its appearance)
+	 * @param section the section index
+	 * @param title the title in the header
 	 * @return the header cell
 	 */
-	public HeaderType getSectionHeader(ListCell<SectionedListItem<RawItemType>> cell, int sectionIndex, String title);
+	HeaderType getSectionHeader(ListCell<?> cell, int section, String title);
 }

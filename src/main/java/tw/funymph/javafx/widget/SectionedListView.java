@@ -77,6 +77,7 @@ public class SectionedListView<RawItemType> extends ListView<SectionedListItem<R
 	private SectionedListViewDataSource<RawItemType> dataSource;
 	protected ObservableList<SectionedListItem<RawItemType>> selectedItems;
 
+	private List<Node> reusableHeaders;
 	private Map<Class<?>, List<Node>> reusableCells;
 
 	private static boolean isNotBlank(String string) {
@@ -102,6 +103,7 @@ public class SectionedListView<RawItemType> extends ListView<SectionedListItem<R
 		defaultFactory = new DefaultSectionedListCellFactory<RawItemType>();
 		selectedItems = observableArrayList();
 		reusableCells = new HashMap<>();
+		reusableHeaders = new ArrayList<>();
 
 		setCellFactory(this);
 		setSectionedListViewCellFactory(cellFactory);
@@ -287,14 +289,20 @@ public class SectionedListView<RawItemType> extends ListView<SectionedListItem<R
 		cells.add(cell);
 	}
 
+	void enqueueReusableHeader(Node cell) {
+		reusableHeaders.add(cell);
+	}
+
 	Optional<Node> dequeueReusableCell(RawItemType item) {
 		List<Node> cells = reusableCells.get(item.getClass());
 		if (cells == null) {
 			return Optional.empty();
 		}
-		return cells.stream().filter(node -> {
-			return node.parentProperty().get() == null;
-		}).findFirst();
+		return cells.stream().filter(node -> node.parentProperty().get() == null).findFirst();
+	}
+
+	Optional<Node> dequeueReusableHeader() {
+		return reusableHeaders.stream().filter(node -> node.parentProperty().get() == null).findFirst();
 	}
 
 	/**
